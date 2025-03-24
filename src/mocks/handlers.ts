@@ -1,21 +1,33 @@
 import { http, HttpResponse } from "msw";
 
 export const handlers = [
-  // GET 요청 예시
-  http.get("/api/example", () => {
-    return HttpResponse.json({
-      message: "This is a mocked response",
-      timestamp: new Date().toISOString(),
-    });
-  }),
+  http.get("/api/category", ({ request }) => {
+    const url = new URL(request.url);
+    const tab = url.searchParams.get("tab");
 
-  // POST 요청 예시
-  http.post("/api/example", async ({ request }) => {
-    const data = await request.json();
-    return HttpResponse.json({
-      message: "Data received",
-      data,
-      timestamp: new Date().toISOString(),
-    });
+    switch (tab) {
+      case "CONSULT":
+        return HttpResponse.json({
+          data: [
+            {
+              categoryId: "PRODUCT",
+              name: "서비스 상품",
+            },
+            {
+              categoryId: "COUNSELING",
+              name: "도입 상담",
+            },
+            {
+              categoryId: "CONTRACT",
+              name: "계약",
+            },
+          ],
+        });
+      default:
+        return HttpResponse.json({
+          message: "This is a mocked response",
+          timestamp: new Date().toISOString(),
+        });
+    }
   }),
 ];
