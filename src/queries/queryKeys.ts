@@ -1,5 +1,7 @@
+import { Props as FaqProps } from "./faq/useGetFaqs";
+
 export const faqKeys = {
   all: ["faq"],
-  lists: () => [...faqKeys.all, "list"],
+  lists: (params: FaqProps) => [...faqKeys.all, "list", params],
   categories: () => [...faqKeys.all, "categories"],
 };
