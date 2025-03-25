@@ -17,11 +17,12 @@ async function fetchTerms({ termsClassID }: Props) {
   return response;
 }
 
-function useGetTerms(props: Props) {
+function useGetTerms(props: Props, options?: Record<string, unknown>) {
   return useQuery({
     queryKey: faqKeys.terms(props),
     queryFn: () => fetchTerms(props),
     select: (data) => data?.data.terms ?? [],
+    ...options,
   });
 }
 

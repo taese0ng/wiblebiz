@@ -11,9 +11,13 @@ interface Props {
 }
 
 function TermsModal({ isOpen, onClose }: Props) {
-  const { data: terms = [], isFetched } = useGetTerms({
-    termsClassID: TERMS_CLASS_ID.JOIN_SERVICE_USE,
-  });
+  const { data: terms = [], isFetched } = useGetTerms(
+    {
+      termsClassID: TERMS_CLASS_ID.JOIN_SERVICE_USE,
+    },
+    { enabled: isOpen },
+  );
+
   const [selectedTerm, setSelectedTerm] = useState<Term | null>(terms[0]);
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
