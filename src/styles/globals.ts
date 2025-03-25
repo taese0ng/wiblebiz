@@ -15,6 +15,24 @@ const globalStyle = css`
   body {
     margin: 0;
   }
+
+  li {
+    list-style: none;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
 `;
 
 export default globalStyle;
