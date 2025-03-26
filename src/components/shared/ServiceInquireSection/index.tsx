@@ -1,31 +1,7 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import downloadIcon from "~/assets/ic_download.svg";
-import talkIcon from "~/assets/ic_talk.svg";
-import writeIcon from "~/assets/ic_write.svg";
-
-const CONTENTS = [
-  {
-    icon: downloadIcon,
-    text: "상품제안서 다운로드",
-    id: "download-inquiry",
-    href: "/public/downloads/proposal.604393960f70e45463b6.pdf",
-    download: "위블비즈 상품제안서",
-  },
-  {
-    icon: talkIcon,
-    text: "상담문의 등록하기",
-    id: "consultation-inquiry",
-    href: "/Counsel",
-  },
-  {
-    icon: writeIcon,
-    text: "카톡으로 문의하기",
-    subText: "ID: Wible Biz(위블 비즈)",
-    id: "kakao-inquiry",
-    href: "https://pf.kakao.com/_xfLxjdb",
-    target: "_blank",
-  },
-];
+import { Link } from "react-router-dom";
+import { SERVICE_INQUIRE_CONTENTS } from "~/constants/shared/serviceInquire";
 
 function ServiceInquireSection() {
   return (
@@ -34,19 +10,25 @@ function ServiceInquireSection() {
 
       <ContentsWrapper>
         <Contents>
-          {CONTENTS.map((content) => (
+          {SERVICE_INQUIRE_CONTENTS.map((content) => (
             <ContentWrapper key={content.id}>
-              <Content
-                href={content.href}
-                {...(content.target && { target: content.target })}
-                {...(content.download && { download: content.download })}
-              >
-                <Icon src={content.icon} />
-                <ContentText>
-                  {content.text}
-                  {content.subText && <em>{content.subText}</em>}
-                </ContentText>
-              </Content>
+              {content.download ? (
+                <StyledAnchor href={content.href} download={content.download}>
+                  <Icon src={content.icon} />
+                  <ContentText>
+                    {content.text}
+                    {content.subText && <em>{content.subText}</em>}
+                  </ContentText>
+                </StyledAnchor>
+              ) : (
+                <StyledLink to={content.href} {...(content.target && { target: content.target })}>
+                  <Icon src={content.icon} />
+                  <ContentText>
+                    {content.text}
+                    {content.subText && <em>{content.subText}</em>}
+                  </ContentText>
+                </StyledLink>
+              )}
             </ContentWrapper>
           ))}
         </Contents>
@@ -82,7 +64,7 @@ const ContentWrapper = styled.li`
   overflow: hidden;
 `;
 
-const Content = styled.a`
+const anchorStyle = css`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,6 +73,19 @@ const Content = styled.a`
   height: 100%;
   width: 100%;
   text-decoration: none;
+`;
+
+const StyledLink = styled(Link)`
+  ${anchorStyle};
+  color: ${({ theme }) => theme.colors.midnight900};
+
+  :hover {
+    background-color: ${({ theme }) => theme.colors.gray10};
+  }
+`;
+
+const StyledAnchor = styled.a`
+  ${anchorStyle};
   color: ${({ theme }) => theme.colors.midnight900};
 
   :hover {
