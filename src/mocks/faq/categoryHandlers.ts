@@ -1,4 +1,6 @@
 import { http, HttpResponse } from "msw";
+import { CATEGORY_TAB_ID } from "~/types/faq/category";
+import { consultCategories, usageCategories } from "./categoryHandlersData";
 
 export const categoryHandlers = [
   http.get("/api/category", ({ request }) => {
@@ -6,28 +8,10 @@ export const categoryHandlers = [
     const tab = url.searchParams.get("tab");
 
     switch (tab) {
-      case "CONSULT":
-        return HttpResponse.json({
-          data: [
-            {
-              categoryId: "PRODUCT",
-              name: "서비스 상품",
-            },
-            {
-              categoryId: "COUNSELING",
-              name: "도입 상담",
-            },
-            {
-              categoryId: "CONTRACT",
-              name: "계약",
-            },
-          ],
-        });
-      default:
-        return HttpResponse.json({
-          message: "This is a mocked response",
-          timestamp: new Date().toISOString(),
-        });
+      case CATEGORY_TAB_ID.CONSULT:
+        return HttpResponse.json(consultCategories);
+      case CATEGORY_TAB_ID.USAGE:
+        return HttpResponse.json(usageCategories);
     }
   }),
 ];

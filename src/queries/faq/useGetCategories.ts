@@ -1,22 +1,26 @@
 import { useQuery } from "@tanstack/react-query";
 import { faqKeys } from "../queryKeys";
 import { customFetch } from "~apis/customFetch";
-import { ResponseCategory } from "~types/faq/category";
+import { CategoryTabID, ResponseCategory } from "~types/faq/category";
 
-async function fetchCategories() {
+export interface Props {
+  tab: CategoryTabID;
+}
+
+async function fetchCategories(props: Props) {
   const response = await customFetch<ResponseCategory>("/api/category", {
     params: {
-      tab: "CONSULT",
+      tab: props.tab,
     },
   });
 
   return response;
 }
 
-function useGetCategories() {
+function useGetCategories(props: Props) {
   return useQuery({
-    queryKey: faqKeys.categories(),
-    queryFn: fetchCategories,
+    queryKey: faqKeys.categories(props),
+    queryFn: () => fetchCategories(props),
     select: (data) => data?.data ?? [],
   });
 }
