@@ -33,7 +33,7 @@ function Header() {
 export default Header;
 
 const Container = styled.header<{ isScrolled: boolean }>`
-  width: 100vw;
+  width: 100%;
   position: sticky;
   top: 0;
   left: 0;
