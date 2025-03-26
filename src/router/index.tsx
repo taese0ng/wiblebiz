@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import styled from "@emotion/styled";
-import { Header, Footer } from "~/components/shared";
+import { Header, Footer, FloatingButton } from "~/components/shared";
 import FAQ from "~pages/FAQ";
 import Guide from "~pages/Guide";
 import News from "~pages/News";
@@ -19,6 +19,7 @@ function Router() {
           <Route path="*" element={<Navigate to="/FAQ" replace />} />
         </Routes>
       </BodyWrapper>
+      <FloatingButton />
       <Footer />
     </BrowserRouter>
   );
