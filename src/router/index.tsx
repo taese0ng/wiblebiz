@@ -30,4 +30,5 @@ export default Router;
 const BodyWrapper = styled.div`
   margin: auto;
   max-width: 1240px;
+  padding-bottom: 80px;
 `;

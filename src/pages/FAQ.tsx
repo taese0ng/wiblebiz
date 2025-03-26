@@ -1,7 +1,11 @@
 import styled from "@emotion/styled";
 import { useEffect } from "react";
 import { FaqSection } from "~/components/faq";
-import { ProcessInfoSection, ServiceInquireSection } from "~/components/shared";
+import {
+  AppStoreInfoSection,
+  ProcessInfoSection,
+  ServiceInquireSection,
+} from "~/components/shared";
 
 function FAQ() {
   useEffect(() => {
@@ -20,6 +24,8 @@ function FAQ() {
       <ServiceInquireSection />
 
       <ProcessInfoSection />
+
+      <AppStoreInfoSection />
     </Container>
   );
 }
