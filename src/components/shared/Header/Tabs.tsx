@@ -26,10 +26,8 @@ function Tabs() {
   return (
     <Container>
       {TABS.map((tab) => (
-        <Tab key={tab.path}>
-          <StyledLink to={tab.path} isActive={location.pathname === tab.path}>
-            {tab.label}
-          </StyledLink>
+        <Tab key={tab.path} isSelected={location.pathname === tab.path}>
+          <StyledLink to={tab.path}>{tab.label}</StyledLink>
         </Tab>
       ))}
     </Container>
@@ -44,12 +42,33 @@ const Container = styled.ul`
   gap: 32px;
 `;
 
-const Tab = styled.li`
+const Tab = styled.li<{ isSelected: boolean }>`
   position: relative;
   height: 80px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(-50%);
+    display: block;
+    width: ${({ isSelected }) => (isSelected ? "100%" : "0")};
+    height: 4px;
+    background-color: ${({ theme: { colors } }) => colors.mint900};
+    opacity: ${({ isSelected }) => (isSelected ? 1 : 0)};
+    transition:
+      width 0.3s ease-in,
+      opacity 0.3s ease-in;
+  }
+
+  &:hover::after {
+    width: 100%;
+    opacity: ${({ isSelected }) => (isSelected ? 1 : 0.2)};
+  }
 `;
 
-const StyledLink = styled(Link)<{ isActive: boolean }>`
+const StyledLink = styled(Link)`
   text-decoration: none;
   font-size: 18px;
   font-weight: 600;
@@ -58,24 +77,4 @@ const StyledLink = styled(Link)<{ isActive: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: block;
-    width: ${({ isActive }) => (isActive ? "100%" : "0")};
-    height: 4px;
-    background-color: ${({ theme: { colors } }) => colors.mint900};
-    opacity: ${({ isActive }) => (isActive ? 1 : 0)};
-    transition:
-      width 0.3s ease-in,
-      opacity 0.3s ease-in;
-  }
-
-  &:hover::after {
-    width: 100%;
-    opacity: ${({ isActive }) => (isActive ? 1 : 0.2)};
-  }
 `;

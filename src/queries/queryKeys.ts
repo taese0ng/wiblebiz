@@ -4,7 +4,8 @@ import { Props as CategoriesProps } from "./faq/useGetCategories";
 
 export const faqKeys = {
   all: ["faq"],
-  lists: (params: FaqProps) => [...faqKeys.all, "list", params],
+  lists: () => [...faqKeys.all, "list"],
+  list: (params: FaqProps) => [...faqKeys.lists(), params],
   categories: (params: CategoriesProps) => [...faqKeys.all, "categories", params],
   terms: (params: TermsProps) => [...faqKeys.all, "terms", params],
 };
