@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 const TABS = [
   {
     label: "서비스 소개",
-    path: "/Quide",
+    path: "/Guide",
   },
   {
     label: "자주 묻는 질문",

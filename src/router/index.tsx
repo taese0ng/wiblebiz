@@ -1,17 +1,22 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Header, Footer } from "~/components/shared";
-import NotFound from "~pages/NotFound";
-import FAQ from "~pages/FAQ";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import styled from "@emotion/styled";
+import { Header, Footer } from "~/components/shared";
+import FAQ from "~pages/FAQ";
+import Guide from "~pages/Guide";
+import News from "~pages/News";
+import Counsel from "~pages/Counsel";
+
 function Router() {
   return (
     <BrowserRouter>
       <Header />
       <BodyWrapper>
         <Routes>
-          <Route path="/" element={<NotFound />} />
           <Route path="/FAQ" element={<FAQ />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/Guide" element={<Guide />} />
+          <Route path="/News" element={<News />} />
+          <Route path="/Counsel" element={<Counsel />} />
+          <Route path="*" element={<Navigate to="/FAQ" replace />} />
         </Routes>
       </BodyWrapper>
       <Footer />

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { MenuFilter, CategoryTab, SearchBar, FaqList, SearchResultBar } from "~/components/faq";
 import { CATEGORY_TABS } from "~/constants/faq/category";
 import { useGetCategories, useGetFaqs } from "~/queries/faq";
@@ -75,6 +75,10 @@ function FAQ() {
     });
     setClickedMore(false);
   };
+
+  useEffect(() => {
+    document.title = "서비스 도입 FAQ | 위블 비즈(Wible Biz) - 친환경 모빌리티 서비스";
+  }, []);
 
   return (
     <Container>
