@@ -11,6 +11,8 @@ export const FAQ_CATEGORY_ID = {
   COUPON: "COUPON",
 } as const;
 
+export type FaqCategoryID = (typeof FAQ_CATEGORY_ID)[keyof typeof FAQ_CATEGORY_ID];
+
 export interface Category {
   categoryID: string;
   name: string;
@@ -26,3 +28,10 @@ export const CATEGORY_TAB_ID = {
 } as const;
 
 export type CategoryTabID = (typeof CATEGORY_TAB_ID)[keyof typeof CATEGORY_TAB_ID];
+
+export interface CategoryJsonData {
+  data: {
+    tabID: CategoryTabID;
+    data: Category[];
+  }[];
+}

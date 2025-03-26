@@ -1,18 +1,28 @@
 import { http, HttpResponse } from "msw";
-import { joinServiceUseTerms, startadminAdminPrivacyTerms } from "./termsHandlersData";
-import { TERMS_CLASS_ID } from "~/types/faq/terms";
+import { ResponseTerms, TermsJsonData } from "~/types/faq/terms";
+import termsData from "./termsDatas.json";
 
 export const termsHandlers = [
   http.get("/api/terms", ({ request }) => {
     const url = new URL(request.url);
     const termsClassID = url.searchParams.get("termsClassID");
 
-    switch (termsClassID) {
-      case TERMS_CLASS_ID.JOIN_SERVICE_USE:
-        return HttpResponse.json(joinServiceUseTerms);
+    const termsJsonData = (termsData as TermsJsonData).data;
 
-      case TERMS_CLASS_ID.STARTADMIN_ADMIN_PRIVACY:
-        return HttpResponse.json(startadminAdminPrivacyTerms);
+    const termData = termsJsonData.find((item) => item.termsClassID === termsClassID);
+
+    if (!termData) {
+      return HttpResponse.json<ResponseTerms>({
+        data: {
+          terms: [],
+        },
+      });
     }
+
+    return HttpResponse.json<ResponseTerms>({
+      data: {
+        terms: termData.terms,
+      },
+    });
   }),
 ];

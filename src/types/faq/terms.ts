@@ -18,3 +18,10 @@ export interface ResponseTerms {
     terms: Term[];
   };
 }
+
+export interface TermsJsonData {
+  data: {
+    termsClassID: TermsClassID;
+    terms: Term[];
+  }[];
+}

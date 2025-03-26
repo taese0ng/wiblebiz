@@ -1,17 +1,22 @@
 import { http, HttpResponse } from "msw";
-import { CATEGORY_TAB_ID } from "~/types/faq/category";
-import { consultCategories, usageCategories } from "./categoryHandlersData";
+import { CategoryJsonData, ResponseCategory } from "~/types/faq/category";
+import categoryData from "./categoryDatas.json";
 
 export const categoryHandlers = [
   http.get("/api/category", ({ request }) => {
     const url = new URL(request.url);
     const tab = url.searchParams.get("tab");
 
-    switch (tab) {
-      case CATEGORY_TAB_ID.CONSULT:
-        return HttpResponse.json(consultCategories);
-      case CATEGORY_TAB_ID.USAGE:
-        return HttpResponse.json(usageCategories);
+    const categoryJsonData = (categoryData as CategoryJsonData).data;
+
+    const tabData = categoryJsonData.find((item) => item.tabID === tab);
+
+    if (!tabData) {
+      return HttpResponse.json<ResponseCategory>({
+        data: [],
+      });
     }
+
+    return HttpResponse.json<ResponseCategory>(tabData);
   }),
 ];
