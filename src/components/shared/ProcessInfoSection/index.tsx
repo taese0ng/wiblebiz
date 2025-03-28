@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { PROCESS_INFO_CONTENTS } from "~/constants/shared/processInfo";
+import { media } from "~/styles/mediaQuery";
 
 function ProcessInfoSection() {
   return (
@@ -12,11 +13,14 @@ function ProcessInfoSection() {
           {PROCESS_INFO_CONTENTS.map((content, index) => (
             <ContentWrapper key={content.id}>
               <Icon src={content.icon} alt={content.title} />
-              <ContentTitle hasArrow={index !== 0}>
-                <em>{index + 1}.</em>
-                {content.title}
-              </ContentTitle>
-              <ContentDescription>{content.description}</ContentDescription>
+
+              <ContentTextWrapper>
+                <ContentTitle hasArrow={index !== 0}>
+                  <em>{index + 1}.</em>
+                  {content.title}
+                </ContentTitle>
+                <ContentDescription>{content.description}</ContentDescription>
+              </ContentTextWrapper>
             </ContentWrapper>
           ))}
         </Contents>
@@ -42,6 +46,11 @@ const Contents = styled.ul`
   display: flex;
   justify-content: space-between;
   gap: 16px;
+
+  ${media.tablet} {
+    flex-direction: column;
+    gap: 24px;
+  }
 `;
 
 const ContentWrapper = styled.li`
@@ -52,9 +61,30 @@ const ContentWrapper = styled.li`
   justify-content: flex-start;
   margin: 0 12px;
   padding: 0 24px;
+
+  ${media.tablet} {
+    flex-direction: row;
+    gap: 16px;
+    padding: 0;
+  }
 `;
 
-const Icon = styled.img``;
+const Icon = styled.img`
+  ${media.tablet} {
+    width: 48px;
+    height: 48px;
+  }
+
+  ${media.mobile} {
+    width: 40px;
+    height: 40px;
+  }
+`;
+
+const ContentTextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const ContentTitle = styled.strong<{ hasArrow: boolean }>`
   position: relative;
@@ -65,20 +95,26 @@ const ContentTitle = styled.strong<{ hasArrow: boolean }>`
     margin-right: 3px;
   }
 
-  ${({ hasArrow }) =>
-    hasArrow &&
-    css`
-      ::before {
-        content: "";
-        position: absolute;
-        left: -36px;
-        top: 0;
-        background-size: auto 100%;
-        width: 24px;
-        height: 24px;
-        background-image: url("/src/assets/ic_step_arrow.svg");
-      }
-    `}
+  ${media.desktop} {
+    ${({ hasArrow }) =>
+      hasArrow &&
+      css`
+        ::before {
+          content: "";
+          position: absolute;
+          left: -36px;
+          top: 0;
+          background-size: auto 100%;
+          width: 24px;
+          height: 24px;
+          background-image: url("/src/assets/ic_step_arrow.svg");
+        }
+      `}
+  }
+
+  ${media.mobile} {
+    font-size: 16px;
+  }
 `;
 
 const ContentDescription = styled.em`
@@ -87,4 +123,9 @@ const ContentDescription = styled.em`
   font-style: normal;
   margin-top: 8px;
   color: ${({ theme }) => theme.colors.gray700};
+
+  ${media.mobile} {
+    font-size: 14px;
+    margin-top: 4px;
+  }
 `;
