@@ -38,6 +38,10 @@ const Container = styled.section`
 const Title = styled.h2`
   font-size: 24px;
   margin: 64px 0 24px 0;
+
+  ${media.mobile} {
+    font-size: 20px;
+  }
 `;
 
 const ContentsWrapper = styled.div``;
