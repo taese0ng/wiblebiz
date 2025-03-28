@@ -1,32 +1,26 @@
 import styled from "@emotion/styled";
+import { useCallback, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-
-const TABS = [
-  {
-    label: "서비스 소개",
-    path: "/Guide",
-  },
-  {
-    label: "자주 묻는 질문",
-    path: "/FAQ",
-  },
-  {
-    label: "새소식",
-    path: "/News",
-  },
-  {
-    label: "상담문의",
-    path: "/Counsel",
-  },
-];
+import { TABS } from "~/constants/shared/header";
 
 function Tabs() {
   const location = useLocation();
 
+  const handleScrollToTop = useCallback(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
+  useEffect(() => {
+    handleScrollToTop();
+  }, [handleScrollToTop, location.pathname]);
+
   return (
     <Container>
       {TABS.map((tab) => (
-        <Tab key={tab.path} isSelected={location.pathname === tab.path}>
+        <Tab key={tab.path} isSelected={location.pathname === tab.path} onClick={handleScrollToTop}>
           <StyledLink to={tab.path}>{tab.label}</StyledLink>
         </Tab>
       ))}

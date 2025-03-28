@@ -2,8 +2,7 @@ import styled from "@emotion/styled";
 import logoKia from "~/assets/logo_kia.svg";
 import TermsModal from "./TermsModal";
 import { useState } from "react";
-
-const COPYRIGHT = "© 2023 KIA CORP. All Rights Reserved.";
+import { COPYRIGHT } from "~/constants/shared/footer";
 
 function Footer() {
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);

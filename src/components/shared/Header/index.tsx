@@ -43,6 +43,7 @@ const Container = styled.header<{ isScrolled: boolean }>`
     css`
       box-shadow: 0 4px 32px 0 rgba(0, 0, 0, 0.08);
     `}
+  z-index: ${({ theme: { zIndex } }) => zIndex.header};
 `;
 
 const Wrapper = styled.div`
