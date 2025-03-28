@@ -5,6 +5,7 @@ import FAQ from "~pages/FAQ";
 import Guide from "~pages/Guide";
 import News from "~pages/News";
 import Counsel from "~pages/Counsel";
+import { media } from "~/styles/mediaQuery";
 
 function Router() {
   return (
@@ -30,5 +31,9 @@ export default Router;
 const BodyWrapper = styled.div`
   margin: auto;
   max-width: 1240px;
-  padding-bottom: 80px;
+  padding: 0 48px 80px 48px;
+
+  ${media.mobile} {
+    padding: 0 24px 80px 24px;
+  }
 `;

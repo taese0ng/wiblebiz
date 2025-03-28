@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import { SERVICE_INQUIRE_CONTENTS } from "~/constants/shared/serviceInquire";
+import { media } from "~/styles/mediaQuery";
 
 function ServiceInquireSection() {
   return (
@@ -52,8 +53,8 @@ const ContentsWrapper = styled.div``;
 
 const Contents = styled.ul`
   display: flex;
-  justify-content: space-between;
   gap: 16px;
+  flex-wrap: wrap;
 `;
 
 const ContentWrapper = styled.li`
@@ -61,7 +62,20 @@ const ContentWrapper = styled.li`
   height: 80px;
   border: 1px solid ${({ theme }) => theme.colors.midnight900};
   border-radius: 5px;
+  box-sizing: border-box;
   overflow: hidden;
+
+  ${media.tablet} {
+    flex: 0 0 calc(50% - 8px);
+
+    &:last-child:nth-child(odd) {
+      flex: 0 0 100%;
+    }
+  }
+
+  ${media.mobile} {
+    flex: 0 0 100%;
+  }
 `;
 
 const anchorStyle = css`
@@ -73,6 +87,12 @@ const anchorStyle = css`
   height: 100%;
   width: 100%;
   text-decoration: none;
+  padding: 0 1.4em;
+  box-sizing: border-box;
+
+  ${media.mobile} {
+    justify-content: flex-start;
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -93,7 +113,12 @@ const StyledAnchor = styled.a`
   }
 `;
 
-const Icon = styled.img``;
+const Icon = styled.img`
+  ${media.tablet} {
+    width: 32px;
+    height: 32px;
+  }
+`;
 
 const ContentText = styled.span`
   font-size: 18px;
@@ -107,5 +132,9 @@ const ContentText = styled.span`
     font-weight: 400;
     color: ${({ theme }) => theme.colors.gray500};
     font-style: normal;
+  }
+
+  ${media.tablet} {
+    font-size: 16px;
   }
 `;
