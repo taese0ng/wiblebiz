@@ -3,7 +3,7 @@ import { CategoryJsonData, ResponseCategory } from "~/types/faq/category";
 import categoryData from "./categoryDatas.json";
 
 export const categoryHandlers = [
-  http.get("/api/category", ({ request }) => {
+  http.get("/category", ({ request }) => {
     const url = new URL(request.url);
     const tab = url.searchParams.get("tab");
 

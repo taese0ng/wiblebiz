@@ -4,7 +4,7 @@ import { ResponseFaq, Item, FaqJsonData } from "~/types/faq/faq";
 import { CategoryTabID, CATEGORY_TAB_ID } from "~/types/faq/category";
 
 export const faqHandlers = [
-  http.get("/api/faq", ({ request }) => {
+  http.get("/faq", ({ request }) => {
     const url = new URL(request.url);
     const limit = Number(url.searchParams.get("limit") ?? 10);
     const offset = Number(url.searchParams.get("offset") ?? 0);

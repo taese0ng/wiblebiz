@@ -22,7 +22,7 @@ async function fetchFaqs({
   tab = "CONSULT",
   question,
 }: Props & { pageParam?: number }) {
-  const response = await customFetch<ResponseFaq>("/api/faq", {
+  const response = await customFetch<ResponseFaq>("/faq", {
     params: {
       faqCategoryID,
       offset: pageParam.toString(),

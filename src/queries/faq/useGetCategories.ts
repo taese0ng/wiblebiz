@@ -8,7 +8,7 @@ export interface Props {
 }
 
 async function fetchCategories(props: Props) {
-  const response = await customFetch<ResponseCategory>("/api/category", {
+  const response = await customFetch<ResponseCategory>("/category", {
     params: {
       tab: props.tab,
     },

@@ -3,7 +3,7 @@ import { ResponseTerms, TermsJsonData } from "~/types/faq/terms";
 import termsData from "./termsDatas.json";
 
 export const termsHandlers = [
-  http.get("/api/terms", ({ request }) => {
+  http.get("/terms", ({ request }) => {
     const url = new URL(request.url);
     const termsClassID = url.searchParams.get("termsClassID");
 

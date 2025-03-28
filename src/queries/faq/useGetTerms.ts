@@ -8,7 +8,7 @@ export interface Props {
 }
 
 async function fetchTerms({ termsClassID }: Props) {
-  const response = await customFetch<ResponseTerms>("/api/terms", {
+  const response = await customFetch<ResponseTerms>("/terms", {
     params: {
       termsClassID,
     },
