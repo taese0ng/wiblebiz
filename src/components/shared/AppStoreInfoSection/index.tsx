@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { APP_STORE_CONTENTS } from "~/constants/shared/appStore";
+import { media } from "~/styles/mediaQuery";
 
 function AppStoreInfoSection() {
   return (
@@ -38,6 +39,15 @@ const Container = styled.section`
   padding: 32px;
   margin-top: 48px;
   box-sizing: border-box;
+
+  ${media.tablet} {
+    gap: 20px;
+  }
+
+  ${media.mobile} {
+    gap: 16px;
+    padding: 24px;
+  }
 `;
 
 const Title = styled.h2`
@@ -48,6 +58,14 @@ const Title = styled.h2`
     font-style: normal;
     color: ${({ theme }) => theme.colors.mint900};
   }
+
+  ${media.tablet} {
+    font-size: 20px;
+  }
+
+  ${media.mobile} {
+    font-size: 16px;
+  }
 `;
 
 const ContentsWrapper = styled.div``;
@@ -56,6 +74,11 @@ const Contents = styled.ul`
   display: flex;
   justify-content: space-between;
   gap: 16px;
+
+  ${media.mobile} {
+    flex-direction: column;
+    gap: 12px;
+  }
 `;
 
 const ContentWrapper = styled.li``;
@@ -69,12 +92,30 @@ const Content = styled.a`
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 8px;
   text-decoration: none;
+
+  ${media.tablet} {
+    width: 264px;
+    height: 56px;
+  }
+
+  ${media.mobile} {
+    height: 48px;
+  }
 `;
 
-const Icon = styled.img``;
+const Icon = styled.img`
+  ${media.tablet} {
+    width: 24px;
+    height: 24px;
+  }
+`;
 
 const ContentTitle = styled.strong`
   font-size: 16px;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.midnight900};
+
+  ${media.tablet} {
+    font-size: 14px;
+  }
 `;
