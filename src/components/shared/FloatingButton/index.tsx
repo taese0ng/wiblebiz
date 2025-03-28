@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { motion, useScroll } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { useState } from "react";
 import topIcon from "~/assets/ic_top.svg";
 
 function FloatingButton() {
@@ -14,17 +14,9 @@ function FloatingButton() {
     });
   };
 
-  useEffect(() => {
-    const unsubscribe = scrollY.onChange((latest) => {
-      if (latest === 0) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-    });
-
-    return () => unsubscribe();
-  }, [scrollY]);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsVisible(latest !== 0);
+  });
 
   return (
     <Container>
