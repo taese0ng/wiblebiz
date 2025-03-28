@@ -3,6 +3,7 @@ import logoKia from "~/assets/logo_kia.svg";
 import TermsModal from "./TermsModal";
 import { useState } from "react";
 import { COPYRIGHT } from "~/constants/shared/footer";
+import { media } from "~/styles/mediaQuery";
 
 function Footer() {
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
@@ -65,21 +66,36 @@ export default Footer;
 const Container = styled.footer`
   padding: 0 48px;
   background-color: ${({ theme }) => theme.colors.midnight900};
-  height: 176px;
+  min-height: 176px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  ${media.tablet} {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    padding: 18px 24px 29px 24px;
+    gap: 24px;
+  }
 `;
 
 const LogoImage = styled.img`
   height: 56px;
   margin-bottom: 2px;
+
+  ${media.mobile} {
+    height: 32px;
+  }
 `;
 
 const Copyright = styled.p`
   color: ${({ theme }) => theme.colors.gray400};
   font-size: 14px;
   margin: 0;
+
+  ${media.mobile} {
+    font-size: 12px;
+  }
 `;
 
 const Information = styled.div`
@@ -87,6 +103,10 @@ const Information = styled.div`
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
+
+  ${media.tablet} {
+    align-items: flex-start;
+  }
 `;
 
 const Util = styled.span`
@@ -100,11 +120,16 @@ const Button = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
+  padding: 0;
   font-size: 16px;
   font-weight: 800;
 
   &:hover {
     text-decoration: underline;
+  }
+
+  ${media.mobile} {
+    font-size: 14px;
   }
 `;
 
@@ -112,6 +137,12 @@ const Address = styled.span`
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
+
+  ${media.tablet} {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 4px;
+  }
 `;
 
 const Span = styled.span`
@@ -122,6 +153,10 @@ const Span = styled.span`
   a {
     color: ${({ theme }) => theme.colors.gray400};
     text-decoration: underline;
+  }
+
+  ${media.mobile} {
+    font-size: 12px;
   }
 `;
 
