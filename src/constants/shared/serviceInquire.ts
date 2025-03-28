@@ -21,13 +21,13 @@ export const SERVICE_INQUIRE_CONTENTS: Content[] = [
     download: "위블비즈 상품제안서",
   },
   {
-    icon: talkIcon,
+    icon: writeIcon,
     text: "상담문의 등록하기",
     id: "consultation-inquiry",
     href: "/Counsel",
   },
   {
-    icon: writeIcon,
+    icon: talkIcon,
     text: "카톡으로 문의하기",
     subText: "ID: Wible Biz(위블 비즈)",
     id: "kakao-inquiry",
