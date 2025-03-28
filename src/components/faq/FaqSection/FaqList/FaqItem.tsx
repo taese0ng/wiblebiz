@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { Item } from "~/types/faq/faq";
 import ArrowIcon from "~/assets/ic_arrow.svg";
 import { AnimatePresence, motion } from "framer-motion";
+import { media } from "~/styles/mediaQuery";
 
 const QUESTION_HEIGHT = 72;
 
@@ -41,9 +42,13 @@ function FaqItem({ faq, isOpen, onClick, skipAnimation, showCategoryName = false
         }
       >
         <Question onClick={handleClick}>
-          {showCategoryName && <CategoryName>{categoryName}</CategoryName>}
-          <CategoryName>{subCategoryName}</CategoryName>
-          <QuestionText>{question}</QuestionText>
+          <QuestionTextWrapper>
+            <CategoryNameWrapper>
+              {showCategoryName && <CategoryName>{categoryName}</CategoryName>}
+              <CategoryName>{subCategoryName}</CategoryName>
+            </CategoryNameWrapper>
+            <QuestionText>{question}</QuestionText>
+          </QuestionTextWrapper>
 
           <Icon
             src={ArrowIcon}
@@ -77,6 +82,7 @@ const Container = styled(motion.li)<{ isOpen: boolean }>`
   background-color: ${({ isOpen, theme: { colors } }) => (isOpen ? colors.gray10 : "transparent")};
   padding-bottom: ${({ isOpen }) => (isOpen ? "10px" : "0")};
   overflow: hidden;
+  border-bottom: 1px solid ${({ theme: { colors } }) => colors.gray100};
 `;
 
 const Question = styled.button`
@@ -86,8 +92,30 @@ const Question = styled.button`
   border: none;
   display: flex;
   align-items: center;
-  padding: 24px 0;
   background-color: transparent;
+
+  ${media.tablet} {
+    padding: 0;
+  }
+`;
+
+const QuestionTextWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+
+  ${media.tablet} {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
+
+const CategoryNameWrapper = styled.div`
+  display: flex;
+  ${media.tablet} {
+    margin-bottom: 4px;
+  }
 `;
 
 const CategoryName = styled.em`
@@ -97,6 +125,24 @@ const CategoryName = styled.em`
   font-weight: 600;
   width: 8em;
   text-align: center;
+
+  ${media.tablet} {
+    width: fit-content;
+    padding: 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+
+    &:not(:first-of-type)::before {
+      content: ">";
+      font-size: 11px;
+      margin: 0 8px;
+    }
+  }
+
+  ${media.mobile} {
+    font-size: 14px;
+  }
 `;
 
 const QuestionText = styled.strong`
@@ -105,6 +151,14 @@ const QuestionText = styled.strong`
   padding: 0 24px;
   flex: 1;
   text-align: left;
+
+  ${media.tablet} {
+    padding: 0;
+  }
+
+  ${media.mobile} {
+    font-size: 16px;
+  }
 `;
 
 const Answer = styled.div`

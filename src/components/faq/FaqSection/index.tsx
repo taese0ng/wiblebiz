@@ -10,6 +10,7 @@ import SearchBar from "./SearchBar";
 import SearchResultBar from "./SearchResultBar";
 import MenuFilter from "./MenuFilter";
 import FaqList from "./FaqList";
+import { media } from "~/styles/mediaQuery";
 
 function FaqSection() {
   const queryClient = useQueryClient();
@@ -129,9 +130,28 @@ const SearchBarWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin: 48px 0 24px 0;
+
+  ${media.tablet} {
+    padding: 12px;
+    margin: 32px 0 16px 0;
+  }
+
+  ${media.mobile} {
+    padding: 0;
+    background-color: transparent;
+    margin: 24px 0 16px 0;
+  }
 `;
 
 const MenuFilterWrapper = styled.div`
   width: 100%;
   margin-bottom: 24px;
+
+  ${media.tablet} {
+    margin-bottom: 16px;
+  }
+
+  ${media.mobile} {
+    margin-bottom: 12px;
+  }
 `;

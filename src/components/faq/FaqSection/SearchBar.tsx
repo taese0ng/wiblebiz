@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { ChangeEvent, FormEvent, InputHTMLAttributes, MouseEvent, useRef } from "react";
 import searchIcon from "~/assets/ic_search.svg";
 import clearIcon from "~/assets/ic_clear.svg";
+import { media } from "~/styles/mediaQuery";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   onSearch?: VoidFunction;
@@ -68,6 +69,10 @@ const Container = styled.form`
   position: relative;
   width: 100%;
   max-width: 400px;
+
+  ${media.tablet} {
+    max-width: unset;
+  }
 `;
 
 const searchButtonWidth = 54;
@@ -81,6 +86,14 @@ const Input = styled.input`
   font-size: 1rem;
   height: 56px;
   padding: 0 ${searchButtonWidth + clearButtonWidth + 16}px 0 16px;
+
+  ${media.tablet} {
+    height: 48px;
+  }
+
+  ${media.mobile} {
+    height: 40px;
+  }
 
   &:focus {
     outline: none;
@@ -101,6 +114,16 @@ const SearchButton = styled.button`
 const Icon = styled.img<{ size: "small" | "middle" }>`
   width: ${({ size }) => (size === "small" ? 25 : 32)}px;
   height: ${({ size }) => (size === "small" ? 25 : 32)}px;
+
+  ${media.tablet} {
+    width: ${({ size }) => (size === "small" ? 20 : 24)}px;
+    height: ${({ size }) => (size === "small" ? 20 : 24)}px;
+  }
+
+  ${media.mobile} {
+    width: ${({ size }) => (size === "small" ? 16 : 20)}px;
+    height: ${({ size }) => (size === "small" ? 16 : 20)}px;
+  }
 `;
 
 const ClearButton = styled.button`

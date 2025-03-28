@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { CATEGORY_TABS } from "~/constants/faq/category";
+import { media } from "~/styles/mediaQuery";
 import { CategoryTabID } from "~/types/faq/category";
 
 interface Props {
@@ -46,12 +47,13 @@ const CategoryTabItem = styled.li<{ isActive: boolean }>`
   height: 56px;
   font-size: 20px;
   box-sizing: border-box;
+  font-weight: bold;
 
   ${({ isActive, theme }) => css`
     background-color: ${isActive ? theme.colors.midnight900 : theme.colors.white};
     color: ${isActive ? theme.colors.white : theme.colors.midnight900};
     border: ${isActive ? "none" : `1px solid ${theme.colors.midnight100}`};
-    font-weight: ${isActive ? "bold" : "normal"};
+    font-weight: ${isActive ? "700" : "600"};
   `};
 
   &:first-of-type {
@@ -60,5 +62,15 @@ const CategoryTabItem = styled.li<{ isActive: boolean }>`
 
   &:last-of-type {
     border-radius: 0 5px 5px 0;
+  }
+
+  ${media.tablet} {
+    height: 48px;
+    font-size: 16px;
+  }
+
+  ${media.mobile} {
+    height: 40px;
+    font-size: 14px;
   }
 `;

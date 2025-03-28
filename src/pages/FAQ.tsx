@@ -6,6 +6,7 @@ import {
   ProcessInfoSection,
   ServiceInquireSection,
 } from "~/components/shared";
+import { media } from "~/styles/mediaQuery";
 
 function FAQ() {
   useEffect(() => {
@@ -39,6 +40,10 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
+
+  ${media.tablet} {
+    align-items: flex-start;
+  }
 `;
 
 const Title = styled.h1`
@@ -49,8 +54,27 @@ const Title = styled.h1`
   justify-content: center;
   margin: 50px 0;
 
+  ${media.tablet} {
+    font-size: 32px;
+    align-items: flex-start;
+    margin: 40px 0;
+  }
+
+  ${media.mobile} {
+    font-size: 24px;
+    margin: 32px 0;
+  }
+
   em {
     font-size: 16px;
     margin-top: 0.4em;
+
+    ${media.tablet} {
+      font-size: 14px;
+    }
+
+    ${media.mobile} {
+      font-size: 12px;
+    }
   }
 `;

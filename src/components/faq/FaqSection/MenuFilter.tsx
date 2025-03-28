@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { ChangeEvent, Fragment } from "react";
+import { media } from "~/styles/mediaQuery";
 import { Category } from "~/types/faq/category";
 
 interface Props {
@@ -47,6 +48,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
 `;
 
 const CategoryItem = styled.input`
@@ -68,4 +70,16 @@ const Label = styled.label<{ isSelected: boolean }>`
     color: ${isSelected ? theme.colors.white : theme.colors.midnight900};
     border-radius: 24px;
   `}
+
+  ${media.tablet} {
+    font-size: 16px;
+    height: 40px;
+    padding: 0 16px;
+  }
+
+  ${media.mobile} {
+    font-size: 14px;
+    height: 32px;
+    padding: 0 12px;
+  }
 `;

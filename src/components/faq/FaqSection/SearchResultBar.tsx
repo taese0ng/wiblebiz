@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import resetIcon from "~/assets/ic_init.svg";
+import { media } from "~/styles/mediaQuery";
 
 interface Props {
   totalCount: number;
@@ -44,8 +45,15 @@ const ResultText = styled.div`
     font-style: normal;
     color: ${({ theme }) => theme.colors.mint900};
   }
-`;
 
+  ${media.tablet} {
+    font-size: 18px;
+  }
+
+  ${media.mobile} {
+    font-size: 14px;
+  }
+`;
 const ResetButton = styled.button`
   background-color: transparent;
   border: none;
@@ -54,9 +62,27 @@ const ResetButton = styled.button`
   align-items: center;
   font-size: 16px;
   font-weight: 800;
+
+  ${media.tablet} {
+    font-size: 14px;
+  }
+
+  ${media.mobile} {
+    font-size: 12px;
+  }
 `;
 
 const Icon = styled.img`
   width: 24px;
   height: 24px;
+
+  ${media.tablet} {
+    width: 20px;
+    height: 20px;
+  }
+
+  ${media.mobile} {
+    width: 16px;
+    height: 16px;
+  }
 `;

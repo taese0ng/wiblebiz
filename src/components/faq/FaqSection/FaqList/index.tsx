@@ -4,6 +4,7 @@ import FaqItem from "./FaqItem";
 import { useEffect, useState } from "react";
 import NoData from "./NoData";
 import { CATEGORY_TAB_ID, CategoryTabID } from "~/types/faq/category";
+import { media } from "~/styles/mediaQuery";
 
 interface Props {
   faqs: Item[];
@@ -88,5 +89,14 @@ const MoreButton = styled.button`
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+  }
+
+  ${media.tablet} {
+    margin-top: 32px;
+    font-size: 16px;
+  }
+
+  ${media.mobile} {
+    font-size: 14px;
   }
 `;
