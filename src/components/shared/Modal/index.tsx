@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import closeIcon from "~/assets/ic_close.svg";
+import { useScrollLock } from "~/hooks";
 
 interface Props {
   isOpen: boolean;
@@ -10,18 +11,11 @@ interface Props {
 }
 
 function Modal({ isOpen, title, onClose, children }: Props) {
+  useScrollLock(isOpen);
+
   const handleClose = () => {
     onClose();
   };
-
-  useEffect(() => {
-    if (isOpen) {
-      const document = window.document;
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [isOpen]);
 
   if (!isOpen) return null;
 
