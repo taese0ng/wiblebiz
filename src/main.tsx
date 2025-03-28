@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 
 async function enableMocking() {
+  // preview에서 실행할 경우 주석처리 필요
   if (process.env.NODE_ENV !== "development") {
     return;
   }

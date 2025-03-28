@@ -2,6 +2,24 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
+const securityHeaders = {
+  "Content-Security-Policy": `
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' 'unsafe-eval';
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' data: https:;
+    font-src 'self';
+    connect-src 'self' https:;
+  `
+    .replace(/\s+/g, " ")
+    .trim(),
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "X-XSS-Protection": "1; mode=block",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+};
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -12,6 +30,14 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    port: 3000,
+    headers: securityHeaders,
+  },
+  preview: {
+    port: 5000,
+    headers: securityHeaders,
+  },
   resolve: {
     alias: {
       "~": path.resolve(__dirname, "./src"),
@@ -35,13 +61,31 @@ export default defineConfig({
   build: {
     outDir: "dist",
     emptyOutDir: true,
-    sourcemap: true,
+    sourcemap: false,
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+      format: {
+        comments: false,
+      },
+    },
+    chunkSizeWarningLimit: 1000,
+    assetsInlineLimit: 4096,
+    cssCodeSplit: true,
+    cssMinify: true,
+    reportCompressedSize: false,
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ["react", "react-dom"],
-          // 필요한 경우 다른 청크를 추가할 수 있습니다
+          "vendor-react": ["react", "react-dom", "react/jsx-runtime"],
+          "vendor-emotion": ["@emotion/react", "@emotion/styled"],
         },
+        chunkFileNames: "assets/js/[name]-[hash].js",
+        entryFileNames: "assets/js/[name]-[hash].js",
+        assetFileNames: "assets/[ext]/[name]-[hash].[ext]",
       },
     },
   },
