@@ -1,54 +1,56 @@
-# React + TypeScript + Vite
+# FAQ 페이지 프로젝트
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+현대 오토에버 채용 과제로 개발된 FAQ 페이지 프로젝트입니다. React, TypeScript, Vite를 사용하여 구현되었으며, MSW를 통한 목데이터 패칭이 구현되어 있습니다.
 
-Currently, two official plugins are available:
+## 주요 기술 스택
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React
+- TypeScript
+- Vite
+- Tanstack-Query
+- emotion
+- framer-motion
+- MSW (Mock Service Worker)
+- Yarn
 
-## Expanding the ESLint configuration
+## 시작하기
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 사전 요구사항
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+- Node.js
+- Yarn
+
+### 설치
+
+```bash
+yarn install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 개발 서버 실행
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+개발 모드로 서버를 실행합니다:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    "react-x": reactX,
-    "react-dom": reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs["recommended-typescript"].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
+```bash
+yarn dev
 ```
+
+### 빌드 및 프리뷰
+
+프로덕션 빌드를 생성하고 프리뷰합니다:
+
+```bash
+yarn build && yarn preview
+```
+
+> **참고**: 프리뷰 모드에서는 기본적으로 MSW(Mock Service Worker)가 비활성화되어 있습니다. 프리뷰 모드에서 API 목데이터를 테스트하고 싶다면 `main.tsx`의 `enableMocking` 조건문을 주석 처리하면 됩니다.
+
+## 주요 기능
+
+- 카테고리별 FAQ 필터링
+- 검색 기능
+- MSW를 통한 목데이터 API 구현
+- 반응형 디자인
+
+## 프로젝트 구조
+
+프로젝트는 React + Vite의 기본 구조를 따르며, FAQ 페이지 구현은 `src` 디렉토리에 위치해 있습니다.
