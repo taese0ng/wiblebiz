@@ -15,6 +15,7 @@ function DetermineBreakpointProvider({
   defaultDesktop = false,
   children,
 }: PropsWithChildren<Props>) {
+  const [isInitialized, setIsInitialized] = useState(false);
   const [isMobile, setIsMobile] = useState(defaultMobile);
   const [isTablet, setIsTablet] = useState(defaultTablet);
   const [isDesktop, setIsDesktop] = useState(defaultDesktop);
@@ -30,13 +31,25 @@ function DetermineBreakpointProvider({
   }, []);
 
   useEffect(() => {
-    handleResize();
+    const initializeBreakpoint = async () => {
+      await handleResize();
+      setIsInitialized(true);
+    };
+
+    initializeBreakpoint();
+  }, [handleResize]);
+
+  useEffect(() => {
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [handleResize]);
+
+  if (!isInitialized) {
+    return null;
+  }
 
   return (
     <DetermineBreakpointContext.Provider
