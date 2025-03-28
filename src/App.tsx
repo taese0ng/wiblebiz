@@ -5,18 +5,21 @@ import { Global, ThemeProvider } from "@emotion/react";
 import globalStyle from "~styles/globals";
 import theme from "~styles/theme";
 import Router from "~/router";
+import DetermineBreakpointProvider from "./contexts/DetermineBreakpointProvider";
 
 function App() {
   const queryClient = new QueryClient({ defaultOptions });
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <ReactQueryDevtools />
-        <Global styles={globalStyle} />
+      <DetermineBreakpointProvider>
+        <ThemeProvider theme={theme}>
+          <ReactQueryDevtools />
+          <Global styles={globalStyle} />
 
-        <Router />
-      </ThemeProvider>
+          <Router />
+        </ThemeProvider>
+      </DetermineBreakpointProvider>
     </QueryClientProvider>
   );
 }
